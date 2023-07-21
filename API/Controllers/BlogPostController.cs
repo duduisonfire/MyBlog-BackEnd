@@ -16,7 +16,7 @@ public class BlogPostController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<ActionResult> CreatePost(BlogPostModel post)
+    public async Task<ActionResult> CreatePost([FromBody] BlogPostModel post)
     {
         if (post == null) return BadRequest("Empty request.");
 
