@@ -1,12 +1,12 @@
 ﻿namespace API;
 
-public class BlogPostServices
+public class BlogPostServices : IBlogPostServices
 {
-    private readonly AppDbContext _dbContext;
+    private readonly IBlogPostRepository _BlogPostRepository;
 
-    public BlogPostServices(AppDbContext dbContext)
+    public BlogPostServices(IBlogPostRepository BlogPostRepository)
     {
-        _dbContext = dbContext;
+        _BlogPostRepository = BlogPostRepository;
     }
 
     public async Task<bool> Create(BlogPostModel post)
@@ -14,16 +14,6 @@ public class BlogPostServices
         post.CreatedAt = DateTime.Now;
         post.UpdatedAt = DateTime.Now;
 
-        try
-        {
-            await _dbContext.Posts!.AddAsync(post);
-            await _dbContext.SaveChangesAsync();
-
-            return true;
-        }
-        catch (Exception)
-        {
-            return false;
-        }
+        return await _BlogPostRepository.NewPost(post);
     }
 }

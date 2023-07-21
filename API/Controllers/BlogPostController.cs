@@ -7,9 +7,9 @@ namespace API;
 public class BlogPostController : ControllerBase
 {
     private readonly ILogger<BlogPostController> _logger;
-    private readonly BlogPostServices _blogPostServices;
+    private readonly IBlogPostServices _blogPostServices;
 
-    public BlogPostController(ILogger<BlogPostController> logger, BlogPostServices blogPostServices)
+    public BlogPostController(ILogger<BlogPostController> logger, IBlogPostServices blogPostServices)
     {
         _logger = logger;
         _blogPostServices = blogPostServices;

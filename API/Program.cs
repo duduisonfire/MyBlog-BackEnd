@@ -10,6 +10,8 @@ builder.Services.AddDbContext<AppDbContext>(
     options => options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString))
 );
 
+builder.Services.AddTransient<IBlogPostRepository, BlogPostRepository>();
+builder.Services.AddTransient<IBlogPostServices, IBlogPostServices>();
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
