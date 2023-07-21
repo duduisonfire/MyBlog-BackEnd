@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-namespace API;
 
+namespace API;
 
 [ApiController]
 [Route("api/posts")]
@@ -9,7 +9,7 @@ public class BlogPostController : ControllerBase
     private readonly ILogger<BlogPostController> _logger;
     private readonly BlogPostServices _blogPostServices;
 
-        public BlogPostController(ILogger<BlogPostController> logger, BlogPostServices blogPostServices)
+    public BlogPostController(ILogger<BlogPostController> logger, BlogPostServices blogPostServices)
     {
         _logger = logger;
         _blogPostServices = blogPostServices;
@@ -18,11 +18,13 @@ public class BlogPostController : ControllerBase
     [HttpGet]
     public async Task<ActionResult> CreatePost([FromBody] BlogPostModel post)
     {
-        if (post == null) return BadRequest("Empty request.");
+        if (post == null)
+            return BadRequest("Empty request.");
 
         var isCreated = await _blogPostServices.Create(post);
 
-        if (!isCreated) return BadRequest("The database doesn't responding.");
+        if (!isCreated)
+            return BadRequest("The database doesn't responding.");
 
         return Ok(post);
     }

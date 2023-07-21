@@ -13,14 +13,15 @@ public class BlogPostServices
     {
         post.CreatedAt = DateTime.Now;
         post.UpdatedAt = DateTime.Now;
-        
+
         try
         {
             await _dbContext.Posts!.AddAsync(post);
             await _dbContext.SaveChangesAsync();
 
             return true;
-        } catch (Exception)
+        }
+        catch (Exception)
         {
             return false;
         }
