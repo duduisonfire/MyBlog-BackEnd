@@ -11,7 +11,7 @@ builder.Services.AddDbContext<AppDbContext>(
 );
 
 builder.Services.AddTransient<IBlogPostRepository, BlogPostRepository>();
-builder.Services.AddTransient<IBlogPostServices, IBlogPostServices>();
+builder.Services.AddTransient<IBlogPostServices, BlogPostServices>();
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
