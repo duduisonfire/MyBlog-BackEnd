@@ -15,7 +15,7 @@ public class BlogPostController : ControllerBase
         _blogPostServices = blogPostServices;
     }
 
-    [HttpGet]
+    [HttpPost]
     public async Task<ActionResult> CreatePost([FromBody] BlogPostModel post)
     {
         if (post == null)
