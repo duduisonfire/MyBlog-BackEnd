@@ -1,4 +1,6 @@
-﻿namespace API;
+﻿using API.Context;
+
+namespace API.Repository;
 
 public class BlogPostRepository : IBlogPostRepository
 {
