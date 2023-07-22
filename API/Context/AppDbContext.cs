@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-namespace API;
+namespace API.Context;
 
 public class AppDbContext : DbContext
 {

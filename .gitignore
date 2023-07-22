@@ -476,5 +476,4 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
-# Dot Env
 .env

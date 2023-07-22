@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace API;
+namespace API.Controllers;
 
 [ApiController]
 [Route("api/posts")]
@@ -18,9 +18,6 @@ public class BlogPostController : ControllerBase
     [HttpPost]
     public async Task<ActionResult> CreatePost([FromBody] BlogPostModel post)
     {
-        if (post == null)
-            return BadRequest("Empty request.");
-
         var isCreated = await _blogPostServices.Create(post);
 
         if (!isCreated)

@@ -1,12 +1,12 @@
-﻿namespace API;
+﻿namespace API.Services;
 
 public class BlogPostServices : IBlogPostServices
 {
-    private readonly IBlogPostRepository _BlogPostRepository;
+    private readonly IBlogPostRepository _blogPostRepository;
 
-    public BlogPostServices(IBlogPostRepository BlogPostRepository)
+    public BlogPostServices(IBlogPostRepository blogPostRepository)
     {
-        _BlogPostRepository = BlogPostRepository;
+        _blogPostRepository = blogPostRepository;
     }
 
     public async Task<bool> Create(BlogPostModel post)
@@ -14,6 +14,6 @@ public class BlogPostServices : IBlogPostServices
         post.CreatedAt = DateTime.Now;
         post.UpdatedAt = DateTime.Now;
 
-        return await _BlogPostRepository.NewPost(post);
+        return await _blogPostRepository.NewPost(post);
     }
 }
