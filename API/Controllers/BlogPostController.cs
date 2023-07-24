@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Cors;
+using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers;
 
@@ -9,19 +10,23 @@ public class BlogPostController : ControllerBase
     private readonly ILogger<BlogPostController> _logger;
     private readonly IBlogPostServices _blogPostServices;
 
-    public BlogPostController(ILogger<BlogPostController> logger, IBlogPostServices blogPostServices)
+    public BlogPostController(
+        ILogger<BlogPostController> logger,
+        IBlogPostServices blogPostServices
+    )
     {
         _logger = logger;
         _blogPostServices = blogPostServices;
     }
 
+    [EnableCors]
     [HttpPost]
     public async Task<ActionResult> CreatePost([FromBody] BlogPostModel post)
     {
-        var isCreated = await _blogPostServices.Create(post);
+        var dbMessenger = await _blogPostServices.Create(post);
 
-        if (!isCreated)
-            return BadRequest("The database doesn't responding.");
+        if (!dbMessenger.IsRequestSuccessful)
+            return BadRequest(dbMessenger.ErrorMessage);
 
         return Ok(post);
     }

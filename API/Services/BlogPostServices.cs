@@ -1,4 +1,6 @@
-﻿namespace API.Services;
+﻿using API.Repository.Classes;
+
+namespace API.Services;
 
 public class BlogPostServices : IBlogPostServices
 {
@@ -9,7 +11,7 @@ public class BlogPostServices : IBlogPostServices
         _blogPostRepository = blogPostRepository;
     }
 
-    public async Task<bool> Create(BlogPostModel post)
+    public async Task<DbMessenger> Create(BlogPostModel post)
     {
         post.CreatedAt = DateTime.Now;
         post.UpdatedAt = DateTime.Now;
