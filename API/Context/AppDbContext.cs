@@ -8,4 +8,9 @@ public class AppDbContext : DbContext
         : base(options) { }
 
     public virtual DbSet<BlogPostModel>? Posts { get; }
+
+    protected override void OnModelCreating(ModelBuilder builder)
+    {
+        builder.Entity<BlogPostModel>().HasIndex(b => b.PostTitle).IsUnique();
+    }
 }

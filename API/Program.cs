@@ -9,6 +9,15 @@ DotEnv.Load();
 var builder = WebApplication.CreateBuilder(args);
 var connectionString = Environment.GetEnvironmentVariable("ConnectionString");
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(
+        name: "MyAllowSpecificOrigins",
+        policy =>
+            policy.WithOrigins("http://localhost:3000", "https://localhost:3000").AllowAnyHeader()
+    );
+});
+
 builder.Services.AddDbContext<AppDbContext>(
     options => options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString))
 );
@@ -28,6 +37,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+app.UseCors("MyAllowSpecificOrigins");
 app.UseAuthorization();
 app.MapControllers();
 app.Run();
