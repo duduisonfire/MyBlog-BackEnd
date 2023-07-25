@@ -28,6 +28,6 @@ public class BlogPostController : ControllerBase
         if (!dbMessenger.IsRequestSuccessful)
             return BadRequest(dbMessenger.ErrorMessage);
 
-        return Ok(post);
+        return Ok(dbMessenger.ErrorMessage);
     }
 }

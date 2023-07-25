@@ -26,9 +26,9 @@ public class BlogPostRepository : IBlogPostRepository
         catch (Exception e)
         {
             dbMessenger.IsRequestSuccessful = false;
-            dbMessenger.ErrorMessage = e.Message;
+            dbMessenger.ErrorMessage = e.InnerException!.Message;
 
-            Console.WriteLine(e.Message);
+            Console.WriteLine(e.InnerException!.Message);
             return dbMessenger;
         }
     }
