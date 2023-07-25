@@ -1,4 +1,4 @@
-﻿using API.Repository.Classes;
+﻿using API.Repository;
 
 namespace API.Services;
 
@@ -11,11 +11,21 @@ public class BlogPostServices : IBlogPostServices
         _blogPostRepository = blogPostRepository;
     }
 
-    public async Task<DbMessenger> Create(BlogPostModel post)
+    public async Task Create(BlogPostModel post)
     {
-        post.CreatedAt = DateTime.Now;
-        post.UpdatedAt = DateTime.Now;
+        try
+        {
+            post.CreatedAt = DateTime.Now;
+            post.UpdatedAt = DateTime.Now;
 
-        return await _blogPostRepository.NewPost(post);
+            await _blogPostRepository.NewPost(post);
+        }
+        catch (Exception e)
+        {
+            if (e.Message.Contains("IX_Posts_PostTitle"))
+                throw new Exception("A post with this title already exists.");
+
+            throw;
+        }
     }
 }

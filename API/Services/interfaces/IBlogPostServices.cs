@@ -1,8 +1,8 @@
-﻿using API.Repository.Classes;
+﻿using API.Repository;
 
 namespace API;
 
 public interface IBlogPostServices
 {
-    Task<DbMessenger> Create(BlogPostModel post);
+    Task Create(BlogPostModel post);
 }

@@ -23,11 +23,14 @@ public class BlogPostController : ControllerBase
     [HttpPost]
     public async Task<ActionResult> CreatePost([FromBody] BlogPostModel post)
     {
-        var dbMessenger = await _blogPostServices.Create(post);
-
-        if (!dbMessenger.IsRequestSuccessful)
-            return BadRequest(dbMessenger.ErrorMessage);
-
-        return Ok(dbMessenger.ErrorMessage);
+        try
+        {
+            await _blogPostServices.Create(post);
+            return Ok(post);
+        }
+        catch (Exception e)
+        {
+            return BadRequest(e.Message);
+        }
     }
 }

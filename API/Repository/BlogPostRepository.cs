@@ -1,5 +1,5 @@
 ﻿using API.Context;
-using API.Repository.Classes;
+using API.Repository;
 
 namespace API.Repository;
 
@@ -12,24 +12,17 @@ public class BlogPostRepository : IBlogPostRepository
         _dbContext = dbContext;
     }
 
-    public async Task<DbMessenger> NewPost(BlogPostModel post)
+    public async Task NewPost(BlogPostModel post)
     {
-        var dbMessenger = new DbMessenger();
-
         try
         {
             await _dbContext.AddAsync(post);
             await _dbContext.SaveChangesAsync();
-
-            return dbMessenger;
         }
         catch (Exception e)
         {
-            dbMessenger.IsRequestSuccessful = false;
-            dbMessenger.ErrorMessage = e.InnerException!.Message;
-
             Console.WriteLine(e.InnerException!.Message);
-            return dbMessenger;
+            throw new Exception(e.InnerException!.Message);
         }
     }
 }

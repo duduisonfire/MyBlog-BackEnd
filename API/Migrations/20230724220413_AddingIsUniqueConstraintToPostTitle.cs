@@ -18,15 +18,18 @@ namespace API.Migrations
                 type: "datetime(6)",
                 nullable: true,
                 oldClrType: typeof(DateTime),
-                oldType: "datetime(6)");
+                oldType: "datetime(6)"
+            );
 
-            migrationBuilder.AlterColumn<string>(
-                name: "PostTitle",
-                table: "Posts",
-                type: "varchar(255)",
-                nullable: false,
-                oldClrType: typeof(string),
-                oldType: "longtext")
+            migrationBuilder
+                .AlterColumn<string>(
+                    name: "PostTitle",
+                    table: "Posts",
+                    type: "varchar(255)",
+                    nullable: false,
+                    oldClrType: typeof(string),
+                    oldType: "longtext"
+                )
                 .Annotation("MySql:CharSet", "utf8mb4")
                 .OldAnnotation("MySql:CharSet", "utf8mb4");
 
@@ -36,31 +39,36 @@ namespace API.Migrations
                 type: "datetime(6)",
                 nullable: true,
                 oldClrType: typeof(DateTime),
-                oldType: "datetime(6)");
+                oldType: "datetime(6)"
+            );
 
-            migrationBuilder.AlterColumn<int>(
-                name: "Id",
-                table: "Posts",
-                type: "int",
-                nullable: false,
-                oldClrType: typeof(string),
-                oldType: "varchar(255)")
-                .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn)
+            migrationBuilder
+                .AlterColumn<int>(
+                    name: "Id",
+                    table: "Posts",
+                    type: "int",
+                    nullable: false,
+                    oldClrType: typeof(string),
+                    oldType: "varchar(255)"
+                )
+                .Annotation(
+                    "MySql:ValueGenerationStrategy",
+                    MySqlValueGenerationStrategy.IdentityColumn
+                )
                 .OldAnnotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Posts_PostTitle",
                 table: "Posts",
                 column: "PostTitle",
-                unique: true);
+                unique: true
+            );
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropIndex(
-                name: "IX_Posts_PostTitle",
-                table: "Posts");
+            migrationBuilder.DropIndex(name: "IX_Posts_PostTitle", table: "Posts");
 
             migrationBuilder.AlterColumn<DateTime>(
                 name: "UpdatedAt",
@@ -70,15 +78,18 @@ namespace API.Migrations
                 defaultValue: new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                 oldClrType: typeof(DateTime),
                 oldType: "datetime(6)",
-                oldNullable: true);
+                oldNullable: true
+            );
 
-            migrationBuilder.AlterColumn<string>(
-                name: "PostTitle",
-                table: "Posts",
-                type: "longtext",
-                nullable: false,
-                oldClrType: typeof(string),
-                oldType: "varchar(255)")
+            migrationBuilder
+                .AlterColumn<string>(
+                    name: "PostTitle",
+                    table: "Posts",
+                    type: "longtext",
+                    nullable: false,
+                    oldClrType: typeof(string),
+                    oldType: "varchar(255)"
+                )
                 .Annotation("MySql:CharSet", "utf8mb4")
                 .OldAnnotation("MySql:CharSet", "utf8mb4");
 
@@ -90,17 +101,23 @@ namespace API.Migrations
                 defaultValue: new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                 oldClrType: typeof(DateTime),
                 oldType: "datetime(6)",
-                oldNullable: true);
+                oldNullable: true
+            );
 
-            migrationBuilder.AlterColumn<string>(
-                name: "Id",
-                table: "Posts",
-                type: "varchar(255)",
-                nullable: false,
-                oldClrType: typeof(int),
-                oldType: "int")
+            migrationBuilder
+                .AlterColumn<string>(
+                    name: "Id",
+                    table: "Posts",
+                    type: "varchar(255)",
+                    nullable: false,
+                    oldClrType: typeof(int),
+                    oldType: "int"
+                )
                 .Annotation("MySql:CharSet", "utf8mb4")
-                .OldAnnotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn);
+                .OldAnnotation(
+                    "MySql:ValueGenerationStrategy",
+                    MySqlValueGenerationStrategy.IdentityColumn
+                );
         }
     }
 }
