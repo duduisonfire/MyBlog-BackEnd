@@ -1,6 +1,4 @@
-﻿using API.Repository;
-
-namespace API.Services;
+﻿namespace API.Services;
 
 public class BlogPostServices : IBlogPostServices
 {
