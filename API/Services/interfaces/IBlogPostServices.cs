@@ -4,5 +4,6 @@ namespace API;
 
 public interface IBlogPostServices
 {
-    Task Create(BlogPostModel post);
+    Task Create(Posts post);
+    Task<List<Posts>> GetPosts(int page);
 }

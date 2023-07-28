@@ -1,8 +1,7 @@
-﻿using API.Repository;
-
-namespace API;
+﻿namespace API;
 
 public interface IBlogPostRepository
 {
-    Task NewPost(BlogPostModel post);
+    Task NewPost(Posts post);
+    Task<List<Posts>> GetPosts(int numberOfPostToSkip);
 }

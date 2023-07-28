@@ -1,5 +1,5 @@
 ﻿using API.Context;
-using API.Repository;
+using Microsoft.EntityFrameworkCore;
 
 namespace API.Repository;
 
@@ -12,11 +12,30 @@ public class BlogPostRepository : IBlogPostRepository
         _dbContext = dbContext;
     }
 
-    public async Task NewPost(BlogPostModel post)
+    public async Task<List<Posts>> GetPosts(int numberOfPostToSkip)
     {
         try
         {
-            await _dbContext.AddAsync(post);
+            var posts = await _dbContext.Posts!
+            .OrderBy(posts => posts.Id)
+            .Skip(numberOfPostToSkip)
+            .Take(4)
+            .ToListAsync();
+
+            return posts;
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e.Message);
+            throw new Exception(e.Message);
+        }
+    }
+
+    public async Task NewPost(Posts post)
+    {
+        try
+        {
+            await _dbContext.Posts!.AddAsync(post);
             await _dbContext.SaveChangesAsync();
         }
         catch (Exception e)

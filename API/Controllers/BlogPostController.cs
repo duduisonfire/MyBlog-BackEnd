@@ -21,12 +21,26 @@ public class BlogPostController : ControllerBase
 
     [EnableCors]
     [HttpPost]
-    public async Task<ActionResult> CreatePost([FromBody] BlogPostModel post)
+    public async Task<ActionResult> CreatePost([FromBody] Posts post)
     {
         try
         {
             await _blogPostServices.Create(post);
             return Ok(post);
+        }
+        catch (Exception e)
+        {
+            return BadRequest(e.Message);
+        }
+    }
+
+    [EnableCors]
+    [HttpGet("{page}")]
+    public async Task<ActionResult> GetPosts(int page)
+    {
+        try
+        {
+            return Ok(await _blogPostServices.GetPosts(page));
         }
         catch (Exception e)
         {
