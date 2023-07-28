@@ -28,6 +28,10 @@ public class Posts
     [Required]
     public required string Post { get; set; }
 
+    [Column("PostImage")]
+    [Required]
+    public required string PostImage { get; set; }
+
     public DateTime? CreatedAt { get; set; }
     public DateTime? UpdatedAt { get; set; }
 }
